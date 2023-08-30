@@ -1,0 +1,462 @@
+{% load static %}
+{% static "media" as baseUrl %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Gallery</title>
+        <link rel="icon" type="image/png" href="{% static 'gallery/img/logo.png' %}">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="{% static 'gallery/apple-touch-icon.png' %}">
+        <link rel="stylesheet" href="{% static 'gallery/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'gallery/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" href="{% static 'gallery/css/fontAwesome.css' %}">
+        <link rel="stylesheet" href="{% static './gallery/fonts/Etiquette' %}">
+        <link rel="stylesheet" href="{% static 'gallery/css/light-box.css' %}">
+        <link rel="stylesheet" href="{% static 'gallery/css/templatemo-style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap">
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Montserrat:700'>
+        <link rel="preconnect" href="{% static 'gallery/https://fonts.gstatic.com' %}">
+        <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Tangerine:wght@700&display=swap">
+        <script src="{% static 'gallery/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                height: 100vh;
+                overflow-y: scroll;
+                scroll-snap-type: y mandatory;
+                background-color: rgb(19, 19, 19);
+            }
+            .preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 99999;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                background: none repeat scroll 0 0 #fff;
+            }
+            .sk-spinner-pulse {
+                width: 60px;
+                height: 60px;
+                background-color: #e44c65;
+                border-radius: 100%;
+                margin: 40px auto;
+                -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+                animation: sk-pulseScaleOut 1s infinite ease-in-out;
+            }
+            @-webkit-keyframes sk-pulseScaleOut {
+                0% {
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                }
+                100% {
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+            @keyframes sk-pulseScaleOut {
+                0% {
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                }
+                100% {
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+            section {
+                height: 100vh;
+            }
+            .title {
+                position: absolute;
+                text-align: center;
+                width: 100vw;
+                top:3vh;
+                left:0vw;
+                background-color: transparent;
+                z-index: 10;
+                font-family: 'etiquetteregular';
+                font-weight: 500;
+                font-size: 130px;
+                color: rgb(255, 255, 255);
+                text-shadow: 5px 5px 10px rgb(255, 255, 255);
+            }
+            .toph {
+                z-index: 11;
+                position: absolute;
+                top: 30vh;
+                left: 0.5vw;
+                width: 99vw;
+                border-width: 15px;
+                border-color: rgb(22, 52, 109);
+            }
+            .heading {
+                margin-top: -30vh;
+                height: 160vh;
+                text-align: center;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 900;
+                background-image: url("{% static 'gallery/bg4.jpg' %}");
+                background-size: 100vw 135vh;
+                background-color: rgb(255, 255, 255);
+                color: rgb(255, 250, 175);
+                font-size: 300px;
+                line-height: 150vh;
+                mix-blend-mode: multiply;
+            }
+            @font-face {
+                font-family: 'etiquetteregular';
+                src: url('{% static "gallery/fonts/etiquette/etiquette-webfont.woff2" %}') format('woff2'),
+                    url('{% static "gallery/fonts/etiquette/etiquette-webfont.woff" %}') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            a:hover {
+                text-decoration: none;
+                text-shadow: 0px 0px 10px white;
+            }
+            .sticky {
+                position: fixed;
+                top: 0vh;
+                left: 0px;
+                width: 100vw;
+                height: 10vh;
+                z-index: 10000;
+                background-image: url("{% static 'gallery/bg4.jpg' %}");
+                background-size: 100vw 135vh;
+                transition: 0.3s;
+            }
+            .navb {
+                position: absolute;
+                left: 0px;
+                top: -30vh;
+                width: 100vw;
+                height: 8vh;
+                z-index: 10000;
+                background-color:rgba(255, 250, 175, 0);
+                box-shadow: 0px 0px 0px black;
+                transition: 0.6s;
+            }
+            .navl {
+                text-shadow: 0px 0px 6px rgb(199, 0, 0);
+                background-color: transparent;
+                color: rgb(255, 255, 255);
+                width: 14vw;
+                text-align: center;
+                height: 12vh;
+                transition: 0.6s;
+                text-align: center;
+            }
+            .navl:hover {
+                background-color: white;
+                color: rgb(199, 0, 0);
+            }
+            .navb:hover {
+                background-color: rgba(255, 255, 255, 0.445);
+            }
+            .dropbtn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+            }
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {background-color: #f1f1f1}
+
+            /* Show the dropdown menu on hover */
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+            }
+            @font-face {
+                font-family: 'etiquetteregular';
+                src: url('{% static "gallery/fonts/etiquette-webfont.woff2" %}') format('woff2'),
+                    url('{% static "gallery/fonts/etiquette-webfont.woff" %}') format('woff');
+                font-weight: normal;
+                font-style: normal;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                transition: 0.5s;
+            }
+              /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            /* The Close Button */
+            .close {
+                color: #000000;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body data-spy="scroll">
+        <div class="preloader">
+            <div class="sk-spinner sk-spinner-pulse"></div>
+        </div>
+        <script>
+            $(window).load(function(){
+                $('.preloader').fadeOut(1000); // set duration in brackets
+            });
+        </script>
+        <section id="video-container">
+            <h1 class="title">Meghnad Saha Hall of Residence</h1>
+            <video id="myVideo" autoplay="" loop="" muted style="position: fixed; z-index: 0; filter: blur(0px);">
+                <source src="{% static 'gallery/vid.mp4' %}" type="video/mp4" />
+            </video>
+            <h1 class="heading"><b>GALLERY</b></h1>
+            <script>
+                var vid = document.getElementById("myVideo");
+                vid.playbackRate = 0.8;
+            </script>
+        </section>
+        <section class="full-screen-portfolio" id="portfolio" style="position: absolute; top: 100vh; left: 0vh; width: 100vw; height: auto; z-index: 5; background-color: #1e73b8ad; ">
+            <nav id="navbar" class="navb" >
+                <a class="navl" id="navl" style="display: none; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 130px; font-weight: 900; text-shadow: 0px 0px 6px rgb(199, 0, 0); position: absolute; z-index: 100000000; top: -4vh; left: 1vw; background-color: transparent;">Gallery</a>
+                <a class="navl" id="navl1" style="width: 16vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 0vw;" href="../">Home</a>
+                <a class="navl" id="navl2" style="width: 18vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 16vw;" href="../hall_of_fame">Hall of Fame</a>
+                <a class="navl" id="navl3" style="width: 16vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 34vw;" href="..#notice">Notice</a>
+                {% if user.is_authenticated %}
+                    <a class="navl" id="navl4" style="width: 16vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 50vw;" href="../database">Database</a>
+                {% else %}
+                    <a class="navl" id="navl7" style="width: 16vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 50vw; color: rgb(201, 201, 201);">Database</a>
+                {% endif %}
+                <a class="navl" id="navl5" style="width: 18vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 66vw;" href="../hcm">Hall Council</a>
+                <div class="navl dropdown" id="navl6" style="width: 16vw; margin-top: -15px; cursor: pointer; font-family: 'etiquetteregular'; font-size: 70px; position: absolute; z-index: 100000000; top: 0vh; left: 84vw;">Year</a>
+                    <i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg></i>
+                    <div class="dropdown-content" style="font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 0px 0px 3px rgb(110, 110, 110); font-size: 30px; top: 12vh; width: 15vw; color:gray;">
+                        <a style="color: rgb(126, 126, 126);" href="#19">2019</a>
+                        <a style="color: rgb(126, 126, 126);" href="#18">2018</a>
+                    </div>
+                </div>
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p style="text-align: center;">Only permitted for MSH boarders, login/signup if you are one! Option to signing-up, password change is in home page.</p>
+                    </div>
+                </div>
+            </nav>
+            <script>
+                var modal = document.getElementById("myModal");
+                var btn1 = document.getElementById("navl7");
+                var span = document.getElementsByClassName("close")[0];
+                btn1.onclick = function() { modal.style.display = "block"; }
+                span.onclick = function() { modal.style.display = "none"; }
+                window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+            </script>
+            <script>
+                window.onscroll = function() {scrollFunction()};
+                var navbar = document.getElementById("navbar");
+                function scrollFunction() {
+                    if (document.body.scrollTop > 525 || document.documentElement.scrollTop > 525) {
+                        navbar.classList.remove("navb");
+                        navbar.classList.add("sticky");
+                        document.getElementById("navl").style.display = "block";
+                        document.getElementById("navl1").style.left = "16vw";
+                        document.getElementById("navl2").style.left = "30vw";
+                        document.getElementById("navl3").style.left = "44vw";
+                        document.getElementById("navl4").style.left = "58vw";
+                        document.getElementById("navl5").style.left = "72vw";
+                        document.getElementById("navl6").style.left = "86vw";
+                        document.getElementById("navl1").style.width = "14vw";
+                        document.getElementById("navl2").style.width = "14vw";
+                        document.getElementById("navl3").style.width = "14vw";
+                        document.getElementById("navl4").style.width = "14vw";
+                        document.getElementById("navl5").style.width = "14vw";
+                        document.getElementById("navl6").style.width = "14vw";
+                        document.getElementById("navl7").style.width = "14vw";
+                        document.getElementById("navl7").style.left = "58vw";
+                        if(document.body.scrollTop > 630 || document.documentElement.scrollTop > 630) {
+                            document.getElementById("myVideo").style.filter = "blur(8px)";
+                        }
+                        else {
+                            document.getElementById("myVideo").style.filter = "blur(0px)";
+                        }
+                    }
+                    else {
+                        navbar.classList.add("navb");
+                        navbar.classList.remove("sticky");
+                        document.getElementById("navl").style.display = "none";
+                        document.getElementById("navl1").style.left = "0vw";
+                        document.getElementById("navl2").style.left = "16vw";
+                        document.getElementById("navl3").style.left = "34vw";
+                        document.getElementById("navl4").style.left = "50vw";
+                        document.getElementById("navl7").style.left = "50vw";
+                        document.getElementById("navl5").style.left = "66vw";
+                        document.getElementById("navl6").style.left = "84vw";
+                        document.getElementById("navl1").style.width = "16vw";
+                        document.getElementById("navl2").style.width = "18vw";
+                        document.getElementById("navl3").style.width = "16vw";
+                        document.getElementById("navl4").style.width = "16vw";
+                        document.getElementById("navl7").style.width = "16vw";
+                        document.getElementById("navl5").style.width = "18vw";
+                        document.getElementById("navl6").style.width = "16vw";
+                        document.getElementById("myVideo").style.filter = "blur(0px)";
+                    }
+                }
+            </script>
+            <div class="container-fluid" >
+                {% for pic in pics1 %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="portfolio-item">
+                            <div class="thumb">
+                                <div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h1>{{ pic.title }}</h1>
+                                        <p>{{ pic.caption }}</p>
+                                    </div>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ '../media' }}/{{ pic.img }}" style="height: 50vh; cursor: default !important;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <div id="19" class="container-fluid" style="margin-top: -4vh;">
+                {% if pics2|length %}
+                    <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 70px; color: white;">2019</h1>
+                {% endif %}
+                {% for pic in pics2 %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="portfolio-item">
+                            <div class="thumb">
+                                <div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h1>{{ pic.title }}</h1>
+                                        <p>{{ pic.caption }}</p>
+                                    </div>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ '../media' }}/{{ pic.img }}" style="height: 50vh; cursor: default !important;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <div id="18" class="container-fluid" style="margin-top: -4vh;">
+                {% if pics3|length %}
+                    <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 70px; color: white;">2018</h1>
+                {% endif %}
+                {% for pic in pics3 %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="portfolio-item">
+                            <div class="thumb">
+                                <div class="hover-effect">
+                                    <div class="hover-content">
+                                        <h1>{{ pic.title }}</h1>
+                                        <p>{{ pic.caption }}</p>
+                                    </div>
+                                </div>
+                                <div class="image">
+                                    <img src="{{ '../media' }}/{{ pic.img }}" style="height: 50vh; cursor: default !important;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!--<section class="u-align-center u-border-9 u-border-grey-75 u-clearfix u-footer u-grey-90" style="height:100%; margin: 0; padding: 0% !important;  background: black;" id="sec-f705">
+                <p class="u-clearfix u-sheet u-sheet-1">
+                    <h1 style="font-family: 'Montserrat', 'sans-serif'; font-weight: 900 !important; font-size: 60px !important; color: white;">Meghnad Saha Hall of Residence</h1>
+                    <div style="color: white !important">
+                        Meghnad Saha Hall of Residence , IIT Kharagpur , Kharagpur , West Bengal , 721302 Security/Office Phone : +91 3222-2-811-80/82
+                        <hr style="border-color: white;">
+                        <h1 style="font-family: 'Montserrat', 'sans-serif'; font-weight: 700 !important; font-size: 40px !important; color: white;">Website Developers</h1>
+                        <br><b>TRIDEV RAPETI</b> (19MA20040)&nbsp; &nbsp; &nbsp;<b>SEELAM SHIVA SURYA</b> (17EE10042)&nbsp; &nbsp; &nbsp; <b>BINAY PRAKASH BARLA</b> (17MF10008)&nbsp; &nbsp; &nbsp;<b>VADHTHYA ANIKETH</b> (19EC10069)<br>
+                        <br><b>Gajula Sai Chaitanya</b> (18CS30018)&nbsp; &nbsp; &nbsp;<b>Divyansh Gupta</b> (18BT30006)&nbsp; &nbsp; &nbsp; <b>Gundupogula Pruthvi Raj</b> (18EC10019)<br>
+                        <br><b>Shobhit Narayan Tripathi</b> (19MI3FP11)&nbsp; &nbsp; &nbsp;<b>Aditya Mettu</b> (18EC10034)<br>
+                        <br>
+                    </div>
+                </p>
+            </section>-->
+            <script src="{% static 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.11.2.min.js" %}"><\/script>')</script>
+            <script src="{% static 'js/vendor/bootstrap.min.js"></script>
+            <script src="{% static 'js/plugins.js"></script>
+            <script src="{% static 'js/main.js"></script>
+        </section>
+
+
+
+    </body>
+</html>

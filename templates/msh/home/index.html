@@ -1,0 +1,453 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <title>Meghnad Saha Hall of Residence</title>
+        <link rel="icon" type="image/png" href="{{ STATIC_URL }}gallery/img/logo.png">
+        <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/component.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/vegas.min.css' %}">
+        <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Josefin Sans' rel = 'stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel = 'stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+        <style>
+            .notice {
+                background-color: white;
+                margin-top: -20px;
+                margin-bottom: -20px;
+            }
+            .tile {
+                padding: 10px;
+                align-content: right;
+            }
+            .left {
+                float: right;
+                background-color: #234f6d;
+                color: white;
+                font-family: 'Roboto';
+                font-size: 30px;
+                margin: 0px;
+                width: 221px;
+                text-align: center;
+            }
+            .right {
+                float: left;
+                background-color: #000000;
+                color: white;
+                font-family: 'Roboto';
+                font-size: 30px;
+                margin: 0px;
+                width: 221px;
+                text-align: center;
+            }
+            .send {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                box-shadow: 0px 0px 0px black;
+                letter-spacing: 5px;
+                border: none;
+                background-color: #e44c65;
+                color: white;
+                font-size: 20px;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-weight: 100;
+                transition: 1.3s;
+            }
+            .send:hover {
+                background-color: black;
+            }
+            .logout {
+                background-color: #e44c65;
+                position: absolute;
+                right: 70px;
+                top: 0px;
+                height: 52px;
+                width: 100px;
+                color: white;
+                font-size: 15px;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-style: normal;
+                font-weight: 300;
+                text-transform: uppercase;
+                transition: 0.5s;
+            }
+            .logout:hover {
+                background-color: white;
+                color: #888;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                transition: 0.5s;
+            }
+              /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            /* The Close Button */
+            .close {
+                color: #000000;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body id="top" data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
+        <div class="preloader">
+            <div class="sk-spinner sk-spinner-pulse"></div>
+        </div>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                    </button>
+                    <a href="top" class="navbar-brand smoothScroll" style="margin-left: -100px;">Meghnad Saha Hall of Residence</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#top" class="smoothScroll"><span>Home</span></a></li>
+                        <li><a href="#notice" class="smoothScroll"><span>Notices</span></a></li>
+                        <li><a href="#contact" class="smoothScroll"><span>Contact us</span></a></li>
+                        <li><a href="gallery" class="smoothScroll"><span>Gallery</span></a></li>
+                        <li><a href="hall_of_fame" class="smoothScroll"><span>Hall of Fame</span></a></li>
+                        <li><a href="hcm" class="smoothScroll"><span>HCM</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="database" class="smoothScroll"><span>Database</span></a></li>
+                        {% else %}
+                            <li><a id="myBtn1" href="#" class="smoothScroll"><span class="tooltip1" style="color: rgb(201, 201, 201);">Database</span></a></li>
+                        {% endif %}
+                    </ul>
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Only permitted for MSH boarders, login/signup if you are one!</p>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <a href="logout" class="logout"><span style="position: absolute; top: 13.5px; left: 21px;">Logout</span></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+            <iframe src="logged" height="100" title="Iframe Example" style="width: 30vw; overflow: hidden; z-index: 1000000000; position: absolute; right: 34.75vw; bottom: 0px; border: 1px solid; border-color: transparent;"></iframe>
+        {% else %}
+            <iframe src="login" height="100" title="Iframe Example" style="width: 30vw; overflow: hidden; z-index: 1000000000; position: fixed; right: 34.75vw; bottom: 0px; border: 1px solid; border-color: transparent;"></iframe>
+        {% endif %}
+        <section id="home">
+            <div class="overlay" style="background-image: url('{% static "home/css/bg2.jpg" %}') !important; background-size: 100% 100%;"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
+                        <h1 class="wow fadeInUp" data-wow-delay="0.6s" style="text-transform: none; font-weight: bolder; font-family: 'Josefin Sans', sans-serif;"><b>#Yo_MS</b></h1>
+                        <p class="wow fadeInUp" data-wow-delay="0.9s"><b>"Ubi Concordia Ibi Victoria"</b></p>
+                        {% if user.is_authenticated %}
+                            <a href="change" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Change password</a>
+                        {% else %}
+                            <a href="signup" class="smoothScroll btn btn-success btn-lg wow fadeInUp" data-wow-delay="1.2s">Sign up/Forgot Password</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" style="height: auto !important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-8 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="about-thumb">
+                            <h1>Shree Meghnad Saha</h1>
+                            <p>Meghnad Saha FRS (1893–1956) was an Indian astrophysicist who developed the Saha ionization equation. He was elected to the Parliament of India in 1952.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 wow fadeInUp about-img" data-wow-delay="0.6s">
+                        <img src="{% static 'home/images/about-img.jpg' %}" class="img-responsive img-circle" alt="About">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="warden" class="col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="section-title text-center">
+                            <h1>Wardens</h1>
+                        </div>
+                    </div>
+                    <div id="team-carousel" class="owl-carousel">
+                        <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.4s" style="width: 400px;">
+                            <div class="team-thumb">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img2.jpg' %}" style="height: 200px; padding: 4px; background-color: white;" class="img-responsive img-circle" alt="Mary">
+                                </div>
+                                <h2 class="heading">Prof. Shamik Chowdhary</h2>
+                                <p class="description"><b>ASSISTANT WARDEN</b><br>School of Environmental Science & Engineering<br>Phone: +91-3222-260525</p>
+                            </div>
+                        </div>
+                        <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.6s" style="margin-bottom: 10px; width: 400px; left: 100px;">
+                            <div class="team-thumb" style="padding-bottom: 50px;">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img1.jpeg' %}" style="height: 200px; padding: 4px; background-color: white;" class="img-responsive img-circle" alt="Jack">
+                                </div>
+                                <h2 class="heading">Prof. Raju K D</h2>
+                                <p class="description"><b>WARDEN</b><br>Rajiv Gandhi School of Intellectual Property Law<br>Phone: +91-3222-281180</p>
+                            </div>
+                        </div>
+                        <div class="item col-md-4 col-sm-6 wow fadeInUp" data-wow-delay="0.8s" style="width: 400px; left: 200px;">
+                            <div class="team-thumb">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img3.jpg' %}" style="height: 200px; padding: 4px; background-color: white;" class="img-responsive img-circle" alt="Linda">
+                                </div>
+                                <h2 class="heading">Prof. Shibayan Roy</h2>
+                                <p class="description"><b>ASSISTANT WARDEN</b><br>Material Science Centre<br>Phone: +91-3222-281180</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="margin: 0px; margin-right: 0px; margin-left: 0vw !important;">
+                <div class="row" style="width: 100vw;">
+                    <div class="clearfix"></div>
+                    <div id="warden" class="col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.3s" style="margin-left: 0vw !important;">
+                        <div class="section-title text-center">
+                            <h1>HMC Regular Employees</h1>
+                        </div>
+                    </div>
+                    <div id="team-carousel" class="container" style="width: 100vw; margin-left: 2.5vw;">
+                        <div class="item col-md-3 wow fadeInUp" data-wow-delay="0.4s" style="width: 23.125vw; left: 0px;">
+                            <div class="team-thumb" style="height: 56.25vh;">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img9.jpg' %}" style="height: 25vh; padding: 0.25vw; background-color: white;" class="img-responsive img-circle" alt="Mary">
+                                </div>
+                                <h2 class="heading">Mr. Partha Mondal</h2>
+                                <p class="description">MANAGER</p>
+                            </div>
+                        </div>
+                        <div class="item col-md-3 wow fadeInUp" data-wow-delay="0.6s" style="margin-bottom: 1vh; width: 23.125vw; left: 0vw;">
+                            <div class="team-thumb" style="padding-bottom: 50px; height: 56.25vh;">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img10.jpg' %}" style="height: 25vh; padding: 0.25vw; background-color: white;" class="img-responsive img-circle" alt="Jack">
+                                </div>
+                                <h2 class="heading">Mr. Madan Nayak</h2>
+                                <p class="description">MESS ASSISTANT GR-III</p>
+                            </div>
+                        </div>
+                        <div class="item col-md-3 wow fadeInUp" data-wow-delay="0.8s" style="width: 23.125vw; left: 0vw;">
+                            <div class="team-thumb" style="height: 56.25vh;">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img11.jpg' %}" style="height: 25vh; padding: 0.25vw; background-color: white;" class="img-responsive img-circle" alt="Linda">
+                                </div>
+                                <h2 class="heading">Mr. Naginder Singh</h2>
+                                <p class="description">MESS ASSISTANT GR-III</p>
+                            </div>
+                        </div>
+                        <div class="item col-md-3 wow fadeInUp" data-wow-delay="0.8s" style="width: 23.125vw; left: 0vw;">
+                            <div class="team-thumb" style="height: 56.25vh;">
+                                <div class="image-holder">
+                                    <img src="{% static 'home/images/team-img12.jpg' %}" style="height: 25vh; padding: 0.25vw; background-color: white;" class="img-responsive img-circle" alt="Linda">
+                                </div>
+                                <h2 class="heading">Mr. T Laxman Rao</h2>
+                                <p class="description">MESS ASSISTANT GR-III</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="notice">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8 col-sm-12 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="section-title">
+                            <h1>NOTICES</h1>
+                            <p>Keep yourself notified with every activity of the Meghnad Saha Hall of Residence.</p>
+                        </div>
+                    </div>
+                    <ul class="grid cs-style-4">
+                        <li class="col-md-6 col-sm-6">
+                            <figure>
+                                <div><img src="{% static 'home/images/gallery-img11.jpg' %}" alt="image 1"></div>
+                                <figcaption>
+                                    <h1>HALL NOTICES</h1>
+                                    <small>All about every activity, celebrations, festivals and important information that you need to know about the MS Hall of Residence.</small>
+                                    {% if user.is_authenticated %}
+                                        <a href="noticehn">Know Hall Notices</a>
+                                    {% else %}
+                                        <a id="myBtn2" href="#" style="background-color: rgb(177, 177, 177);">Know Hall Notices</a>
+                                    {% endif %}
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="col-md-6 col-sm-6">
+                            <figure>
+                                <div><img src="{% static 'home/images/gallery-img2.jpeg' %}" alt="image 2"></div>
+                                <figcaption>
+                                    <h1>GC NOTICES</h1>
+                                    <small>Every information about the upcoming General Championship, namely, the standings, the fixtures, rules, guidelines and our performance.</small>
+                                    {% if user.is_authenticated %}
+                                        <a href="noticegc">Know GC Notices</a>
+                                    {% else %}
+                                        <a id="myBtn3" href="#" style="background-color: rgb(177, 177, 177);">Know GC Notices</a>
+                                    {% endif %}
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="col-md-6 col-sm-6">
+                            <figure>
+                                <div><img src="{% static 'home/images/gallery-img3.jpeg' %}" alt="image 3"></div>
+                                <figcaption>
+                                    <h1>MESS NOTICES</h1>
+                                    <small>All details about the mess commitee, mess duty and the menu are available here.</small>
+                                    {% if user.is_authenticated %}
+                                        <a href="noticegc">Know Mess Notices</a>
+                                    {% else %}
+                                        <a id="myBtn4" href="#" style="background-color: rgb(177, 177, 177);">Know Mess Notices</a>
+                                    {% endif %}
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="col-md-6 col-sm-6">
+                            <figure>
+                                <div><img src="{% static 'home/images/gallery-img4.jpg' %}" alt="image 4" style="height: 395px;"></div>
+                                <figcaption>
+                                    <h1>General Notices</h1>
+                                    <small>All information about what's going on in the campus.</small>
+                                    <a href="noticegc">Know General Notices</a>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10 col-sm-12" style="width:1000px; margin-left: 90px;">
+                        <div class="col-lg-offset-1 col-lg-10 section-title wow fadeInUp" data-wow-delay="0.4s">
+                            <h1>Send a message</h1>
+                        </div>
+                        <form id="myForm" action="#" method="post" class="wow fadeInUp" data-wow-delay="0.8s">
+                            <div class="col-md-6 col-sm-6">
+                                <input name="roll" type="text" class="form-control" id="roll" placeholder="Roll Number">
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea name="message" rows="6" class="form-control" id="message" placeholder="Message"></textarea>
+                            </div>
+                            <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
+                                <button type="button" class="send" style="width: 200px; border-radius: 5px;" onclick="SubForm()" placeholder="SEND MESSAGE">SUBMIT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <div class="container">
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <ul class="social-icon">
+                            <li><a href="https://www.facebook.com/people/Meghnad-Saha-Hall-of-ResidenceIIT-Kharagpur/100048064886184/" target="_blank" class="fa fa-facebook wow fadeInUp" data-wow-delay="0.2s"></a></li>
+                            <li><a href="mailto:mshall@iitkgp.ac.in" class="fa fa-envelope wow fadeInUp" data-wow-delay="0.4s"></a></li>
+                            <li><a href="https://in.linkedin.com/company/meghnad-saha-hall-of-residence-indian-institute-of-technology-kharagpur" target="_blank" class="fa fa-linkedin wow fadeInUp" data-wow-delay="0.6s"></a></li>
+                            <!--<li><a href="#" class="fa fa-instagram wow fadeInUp" data-wow-delay="0.8s"></a></li>
+                            <li><a href="#" class="fa fa-google-plus wow fadeInUp" data-wow-delay="1.0s"></a></li>-->
+                        </ul>
+                        <p class="wow fadeInUp"  data-wow-delay="1s" >Meghnad Saha Hall of Residence IIT Kharagpur, Kharagpur, West Bengal 721302 <br> Security/Office Phones: +91 3222-2-811-80/82</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <a href="#top" class="go-top"><i class="fa fa-angle-up"></i></a>
+        <script src="{% static 'home/js/jquery.js' %}"></script>
+        <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'home/js/vegas.min.js' %}"></script>
+        <script src="{% static 'home/js/modernizr.custom.js' %}"></script>
+        <script src="{% static 'home/js/toucheffects.js' %}"></script>
+        <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'home/js/smoothscroll.js' %}"></script>
+        <script src="{% static 'home/js/wow.min.js' %}"></script>
+        <script src="{% static 'home/js/custom.js' %}"></script>
+        <script>
+            var modal = document.getElementById("myModal");
+            var btn1 = document.getElementById("myBtn1");
+            var btn2 = document.getElementById("myBtn2");
+            var btn3 = document.getElementById("myBtn3");
+            var btn4 = document.getElementById("myBtn4");
+            var span = document.getElementsByClassName("close")[0];
+            btn1.onclick = function() { modal.style.display = "block"; }
+            btn2.onclick = function() { modal.style.display = "block"; }
+            btn3.onclick = function() { modal.style.display = "block"; }
+            btn4.onclick = function() { modal.style.display = "block"; }
+            span.onclick = function() { modal.style.display = "none"; }
+            window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+        </script>
+        <script>
+            function SubForm (){
+                $.ajax({
+                    url:"https://api.apispreadsheets.com/data/LKYSZuKpis0WYePL/",
+                    type:"post",
+                    data:$("#myForm").serializeArray(),
+                    success: function(){
+                        alert("Form Data Submitted :)")
+                    },
+                    error: function(){
+                        alert("There was an error :(")
+                    }
+                });
+            }
+        </script>
+        <script>
+            $(function() {
+                $('body').vegas({
+                    slides: [
+                        { src: '{% static "home/images/h1.jpg" %}' },
+                        { src: '{% static "home/images/h4.jpg" %}' },
+                        { src: '{% static "home/images/h5.jpg" %}' },
+                        { src: '{% static "home/images/h6.jpg" %}' },
+                        { src: '{% static "home/images/h7.jpg" %}' },
+                        { src: '{% static "home/images/h8.jpg" %}' },
+                        { src: '{% static "home/images/h9.jpg" %}' },
+                        { src: '{% static "home/images/h12.jpg" %}' }
+                    ],
+                    timer: false,
+                    transition: [ 'zoomIn', ],
+                    animation: ['kenburns']
+                });
+            });
+        </script>
+    </body>
+</html>

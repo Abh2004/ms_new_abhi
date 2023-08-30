@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>MEGHNAD SAHA HALL OF RESIDENCE</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        <link rel="icon" type="image/png" href="{% static 'gallery/img/logo.png' %}">
+        <link href="{% static 'database/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'database/assets/css/table.css' %}" rel="stylesheet">
+        <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <script src="{% static 'database/assets/js/jquery-2.1.0.min.js' %}"></script>
+        <script>
+            function display_elems(event) {
+                $(document).ready(function () {
+                    var dept = document.forms[0].elements["dept"].value;
+                    var year = document.forms[0].elements["year"].value;
+                    console.log(dept + ' ' + year);
+                    var url = "https://raw.githubusercontent.com/Aditya-Mettu/halllwebsite/main/subpages/database/data/ug.json?token=APVWDB3RBRL722KPWF4D3H3AUP672";
+                    $.getJSON(url, function (data) {
+                        console.log(data);
+                        var student = '';
+                        student += '<center>';
+                        student += '<table class="table-fit" style="overflow-y:auto;">';
+                        student += '<tr>';
+                        student += '<th>'+'<center>Roll No</center>'+'</th>';
+                        student += '<th>'+'<center>Name</center>'+'</th>';
+                        student += '<th>'+'<center>Degree</center>'+'</th>';
+                        student += '</tr>';
+                        $.each(data, function (key, value) {
+                            if((dept == "" && year == "") || (year == "" && dept == value.dept) || (dept == "" && year == value.year) || (dept == value.dept && year == value.year)) {
+                                student += '<tr>';
+                                student += '<td>' + value.Roll + '</td>';
+                                student += '<td>' + value.Name + '</td>';
+                                student += '<td>' + value.degree + '</td>';
+                                student += '</tr>';
+                            }
+                        });
+
+                        student += '</table>';
+                        student += '</center>';
+                        //INSERTING ROWS INTO TABLE
+                        $('#res').html(student);
+                    });
+                });
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <header id="header" class="fixed-top d-flex align-items-center ">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <h1 class="text-light"><a href="#"><span>MEGHNAD SAHA HALL OF RESIDENCE</span></a></h1>
+                </div>
+                <nav id="navbar" class="navbar">
+                    <ul>
+                        <li><a href="../">Home</a></li>
+                        <li><a href="../gallery">Gallery</a></li>
+                        <li><a href="../hall_of_fame">Hall of Fame</a></li>
+                        <li><a href="..#notice">Notices</a></li>
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
+            </div>
+        </header>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <div class="footer header-transparent" style="position: fixed;left: 0;bottom: 0;width: 100%;background: #0b212d;color:white;">
+            <div class="d-flex justify-content-between">
+                <div class="p-2"> Security/Office Phones:&nbsp;<br>+91 3222-2-811-80/82 </div>
+                <div class="p-2"> MS Hall of Residence, IIT Kharagpur<br> Kharagpur, West Bengal</div>
+                <div class="p-2">Email-ID: <br>  mshall @ iitkgp.ac.in</div>
+            </div>
+            <div><center></center></div>
+        </div>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <script src="{% static 'database/assets/vendor/aos/aos.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/php-email-form/validate.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/purecounter/purecounter.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+        <script src="{% static 'database/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+        <script src="{% static 'database/assets/js/main.js' %}"></script>
+    </body>
+</html>

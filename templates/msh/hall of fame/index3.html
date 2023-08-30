@@ -1,0 +1,580 @@
+{% load static %}
+{% static "hall of fame/images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <title>Hall of Fame</title>
+        <link rel="icon" type="image/png" href="{% static 'hall of fame/images/logo.png' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Josefin Sans' rel = 'stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel = 'stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap">
+        <link rel="stylesheet" href="{% static 'hall of fame/style.css' %}" />
+        <style>
+            html {
+                scroll-behavior: smooth !important;
+                overflow-x: hidden !important;
+            }
+            .medalcount {
+                font-family: 'Josefin Sans', sans-serif;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+            .medalnumber {
+                font-family: 'Roboto', sans-serif;
+                font-size: 62px;
+                font-weight: bolder;
+                text-transform: uppercase;
+            }
+            .wardentext {
+                background-image: url('{% static "hall of fame/images/PIC_1.jpg" %}');
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                line-height: 50px;
+                font-size: 80px !important;
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-family: 'Kanit', sans-serif;
+                -webkit-font-smoothing: antialiased;
+            }
+            .footer3 {
+                padding-top: 20px;
+                height: 60%vh;
+                background-color: #ffc400;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-size: 15px;
+                font-weight: 100;
+                color: rgb(0, 0, 0);
+            }
+            .foot1 {
+                padding: 5px;
+                cursor: pointer;
+            }
+            .foot2 {
+                padding: 5px;
+                position: absolute;
+                top: 4876px;
+                left: 1220px;
+                cursor: pointer;
+            }
+            .foot3 {
+                padding: 5px;
+                position: absolute;
+                top: 4876px;
+                left: 720px;
+                cursor: pointer;
+            }
+            .foot1:hover, .foot2:hover, .foot3:hover {
+                background-color: white;
+                border-radius: 50px;
+                box-shadow: 0px 0px 3px black;
+            }
+            .fa-facebook {
+                border-radius: 100px;
+                padding: 5px;
+                padding-left: 8.5px;
+                padding-right: 8.5px;
+                background-color: transparent;
+                color: rgb(255, 255, 255);
+            }
+            .fa-linkedin {
+                border-radius: 100px;
+                padding: 5px;
+                padding-left: 6px;
+                padding-right: 6px;
+                background-color: transparent;
+                color: rgb(255, 255, 255);
+            }
+            .fa-envelope {
+                border-radius: 100px;
+                padding: 5px;
+                background-color: transparent;
+                color: rgb(255, 255, 255);
+            }
+            .fa-facebook:hover {
+                border-radius: 100px;
+                padding: 5px;
+                padding-left: 8.5px;
+                padding-right: 8.5px;
+                background-color: white;
+                color: rgb(0, 26, 255);
+            }
+            .fa-linkedin:hover {
+                border-radius: 100px;
+                padding: 5px;
+                padding-left: 6px;
+                padding-right: 6px;
+                background-color: white;
+                color: rgb(0, 140, 255);
+            }
+            .fa-envelope:hover {
+                border-radius: 100px;
+                padding: 5px;
+                background-color: white;
+                color: rgb(255, 38, 0);
+            }
+            ::-webkit-scrollbar {
+                opacity:0.2;
+                width: 5px;
+                height: 0px;
+                background-color: #0d0cb5;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #ffc400;
+                width:5px;
+                height:0px;
+            }
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                transition: 0.5s;
+            }
+              /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+            }
+            /* The Close Button */
+            .close {
+                color: #000000;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body scroll-behavior: smooth; data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">MSH <span>Iluminati</span></a>
+                <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav nav ml-auto">
+                        <li class="nav-item"><a href="../" class="nav-link"><span>Home</span></a></li>
+                        <li class="nav-item"><a href="..#notice" class="nav-link"><span>Notices</span></a></li>
+                        <li class="nav-item"><a href="../gallery" class="nav-link"><span>Gallery</span></a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a href="../database" class="nav-link"><span>Database</span></a></li>
+                        {% else %}
+                            <li class="nav-item"><a id="myBtn1" href="#" class="nav-link"><span style="color: rgb(201, 201, 201);">Database</span></a></li>
+                        {% endif %}
+                        <li class="nav-item"><a href="../hcm" class="nav-link"><span>HCM</span></a></li>
+                    </ul>
+                    <div id="myModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p style="text-align: center;">Only permitted for MSH boarders, login/signup if you are one! Option to signing-up, password change is in home page.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section id="home-section" class="hero js-fullheight">
+            <h3 class="vr"><span>Welcome</span> to MSH Iluminati.</h3>
+            <div id="timer" class="text-center">
+                <div class="time" style="padding-top: 10px; padding-bottom: 10px;">
+                    <a class="medalnumber">12</a><br><a class="medalcount">GOLDS</a>
+                </div>
+                <div class="time" style="padding-top: 10px; padding-bottom: 10px;">
+                    <a class="medalnumber">6</a><br><a class="medalcount">SILVERS</a>
+                </div>
+                <div class="time" style="padding-top: 10px; padding-bottom: 10px;">
+                    <a class="medalnumber">7</a><br><a class="medalcount">BRONZES</a>
+                </div>
+                <div class="time" style="padding-top: 10px; padding-bottom: 10px;">
+                    <a class="medalnumber">25</a><br><a class="medalcount">+ 3 OTHER MEDALS</a>
+                </div>
+            </div>
+            <div class="home-slider owl-carousel js-fullheight">
+                <div class="slider-item js-fullheight">
+                    <div class="overlay"></div>
+                    <div class="container-fluid px-0">
+                        <div class="row d-flex no-gutters slider-text js-fullheight align-items-end justify-content-end" data-scrollax-parent="true">
+                            <div class="one-third order-md-last js-fullheight img" style="background-image:url('{% static "hall of fame/images/PIC_2.jpg" %}'); background-position: top;">
+                                    <div class="overlay"></div>
+                            </div>
+                            <div class="one-forth js-fullheight d-flex align-items-start align-items-md-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                                <div class="text mt-4 mt-md-0">
+                                    <h1 class="mb-4">Hall of <span>Fame</span> 2021</span></h1>
+                                    <h2 class="mb-4">2012-2021</h2>
+                                    <p><a href="#schedule-section" class="btn btn-primary py-3 px-4">Champion</a> <a href="#schedule-section" class="btn btn-white py-3 px-4" style="margin-right: 3.5px;">Boarders</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-item js-fullheight">
+                    <div class="overlay"></div>
+                    <div class="container-fluid px-0">
+                        <div class="row d-flex no-gutters slider-text js-fullheight align-items-end justify-content-end" data-scrollax-parent="true">
+                            <div class="one-third order-md-last js-fullheight img" style="background-image:url('{% static "hall of fame/images/footer.jpg" %}');">
+                                    <div class="overlay"></div>
+                            </div>
+                            <div class="one-forth js-fullheight d-flex align-items-start align-items-md-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                                <div class="text mt-4 mt-md-0">
+                                    <h1 class="mb-4">Hall of <span>Fame</span> 2021</span></h1>
+                                    <h2 class="mb-4">2012-2021</h2>
+                                    <p><a href="#schedule-section" class="btn btn-primary py-3 px-4">Champion</a> <a href="#schedule-section" class="btn btn-white py-3 px-4" style="margin-right: 3.5px;">Boarders</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-about ftco-counter ftco-no-pb img ftco-section" id="about-section">
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-md-6 col-lg-5 d-flex">
+                        <div class="img-about img d-flex align-items-stretch">
+                            <div class="overlay"></div>
+                            <div class="img d-flex align-self-stretch align-items-center" style="background-image:url('{% static "hall of fame/images/about-1.png" %}');"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-7 pl-lg-5 pt-5">
+                        <div class="row justify-content-start pb-3">
+                            <div class="col-md-12 heading-section ftco-animate">
+                                <span class="subheading">Welcome</span>
+                                <h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">Pride of MSH</h2>
+                                <p> Everybody likes a winner , And it's not just that they're winners. It's the way they secure the win , the near-heroic feats that allow them to come out on top , the hours of hard work , dedication and discipline that make them winner . They are the ones we look up to , form the athletes we idolize to the hard working entrepreneurs we admire . </p>
+                                <p>You can go the distance, you can run the mile . You can walk straight through hell with a smile . You can be a hero, you can get the gold . Breaking all the records they thought never could be broke . Do it for your people, do it for your pride . How you ever gonna know if you never even try? </p>
+                            </div>
+                        </div>
+                        <div class="counter-wrap ftco-animate d-flex mt-md-3">
+                            <div class="text p-4 pr-5 bg-primary">
+                                <p class="mb-0">
+                                    <span class="number" data-number="19">0</span>
+                                    <span>Years, since inauguration</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section ftco-no-pb ftco-no-pt">
+            <div class="container-fluid px-0">
+                <div class="row no-gutters">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="gallery img" style="background-image: url('{% static "hall of fame/images/gallery-1.jpg" %}');"></div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="gallery img" style="background-image: url('{% static "hall of fame/images/gallery2.jpg" %}');"></div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="gallery img" style="background-image: url('{% static "hall of fame/images/gallery3.jpg" %}');"></div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                        <div class="gallery img" style="background-image: url('{% static "hall of fame/images/gallery4.jpeg" %}');"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--<section class="ftco-section ftco-subscribe img" style="background-image: url('{% static "hall of fame/images/bg_1.jpg.webp);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row justify-content-center pb-5">
+                    <div class="col-md-7 heading-section heading-section-white text-center ftco-animate">
+                        <h2 class="mb-4">Join Our Event</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                        <div class="row d-flex justify-content-center mt-4">
+                            <div class="col-md-10">
+                                <form action="#" class="subscribe-form">
+                                    <div class="form-group d-flex">
+                                        <input type="text" class="form-control" placeholder="Enter email address">
+                                        <input type="submit" value="Subscribe" class="submit px-3">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+        <section class="ftco-section bg-light" id="schedule-section">
+            <div class="container">
+                <div class="row justify-content-center pb-5">
+                    <div class="col-md-12 heading-section text-center ftco-animate">
+                        <span class="subheading">Illuminati</span>
+                        <h2 class="mb-4">Champion Boarders</h2>
+                        <p>Their Desire, their Dream, their Dedication, their Determination, they Deserve our applause</p>
+                    </div>
+                </div>
+                <div class="ftco-schedule">
+                    <div class="row">
+                        <div class="col-md-4 nav-link-wrap">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link ftco-animate" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="false">2020-21</a>
+                                <a class="nav-link ftco-animate" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">2019-20</a>
+                                <a class="nav-link ftco-animate" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="true">2018-19</a>
+                                <a class="nav-link ftco-animate" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4" aria-selected="true">2017-18</a>
+                                <a class="nav-link ftco-animate" id="v-pills-5-tab" data-toggle="pill" href="#v-pills-5" role="tab" aria-controls="v-pills-5" aria-selected="true">2016-17</a>
+                                <a class="nav-link ftco-animate" id="v-pills-6-tab" data-toggle="pill" href="#v-pills-6" role="tab" aria-controls="v-pills-6" aria-selected="false">2012-13</a>
+                                <a class="nav-link ftco-animate" id="v-pills-7-tab" data-toggle="pill" href="#v-pills-7" role="tab" aria-controls="v-pills-7" aria-selected="true">2011-12</a>
+                            </div>
+                        </div>
+                        <div class="col-md-8 tab-wrap">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab" style="width: 1000px;">
+                                    {% if champs20t.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Tech</h2>
+                                    {% endif %}
+                                    {% for champs in champs20t %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-day-2-tab">
+                                    {% if champs19c.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">SoCult</h2>
+                                    {% endif %}
+                                    {% for champs in champs19c %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                    {% if champs19t.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Tech</h2>
+                                    {% endif %}
+                                    {% for champs in champs19t %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
+                                    {% if champs18s.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Sports</h2>
+                                    {% endif %}
+                                    {% for champs in champs18s %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-day-4-tab">
+                                    {% if champs17s.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Sports</h2>
+                                    {% endif %}
+                                    {% for champs in champs17s %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-5" role="tabpanel" aria-labelledby="v-pills-day-5-tab">
+                                    {% if champs16s.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Sports</h2>
+                                    {% endif %}
+                                    {% for champs in champs16s %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-6" role="tabpanel" aria-labelledby="v-pills-day-6-tab">
+                                    {% if champs12c.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">SoCult</h2>
+                                    {% endif %}
+                                    {% for champs in champs12c %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-7" role="tabpanel" aria-labelledby="v-pills-day-7-tab">
+                                    {% if champs11s.count != 0 %}
+                                        <h2 style="text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 40px; width: 700px;">Sports</h2>
+                                    {% endif %}
+                                    {% for champs in champs11s %}
+                                        {% if champs.medal|length == 4 %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/gold.jpg' %}'); background-size: cover;">
+                                        {% elif 'ilv' in champs.medal or 'ILV' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/silver.jpg' %}'); background-size: cover;">
+                                        {% elif 'onz' in champs.medal or 'ONZ' in champs.medal %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background: url('{% static 'hall of fame/images/bronze.jpg' %}'); background-size: cover;">
+                                        {% else %}
+                                            <div class="speaker-wrap ftco-animate d-flex" style="border-radius: 20px; padding: 10px; width: 700px; background-color: rgb(255, 246, 230); background-size: cover;">
+                                        {% endif %}
+                                                <div class="text pl-md-5" style="width: auto !important; margin: auto !important; padding-left: 0px !important; align-content : center;">
+                                                    <a style="color: white; text-shadow: 0px 0px 10px black; font-size: 30px; href="#"><b>{{ champs.name }}</b></a>
+                                                    <a class="speaker-name" style="color: black;">&mdash; <a href="#" style="text-shadow: 0px 0px 10px rgb(255, 255, 255); font-size: 25px;"><b>{{ champs.competition }}</b></a> <span class="position" style="text-shadow: 0px 0px 10px rgb(0, 0, 0); color: rgba(255, 255, 255, 0.6);">{{ champs.field }}</span></a>
+                                                </div>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--<section class="u-align-center u-border-9 u-border-grey-75 u-clearfix u-footer u-grey-90 u-footer" style="border: none; background: black;" id="sec-f705">
+                <p class="u-clearfix u-sheet u-sheet-1">
+
+                    <h1 style="font-family: 'Montserrat', 'sans-serif'; font-weight: 900 !important; font-size: 60px !important; color: white;">Meghnad Saha Hall of Residence</h1>
+                <div style="color: white !important">
+
+                    Meghnad Saha Hall of Residence , IIT Kharagpur , Kharagpur , West Bengal , 721302 Security/Office Phone : +91 3222-2-811-80/82
+                    <hr style="border-color: white;">
+                    <h1 style="font-family: 'Montserrat', sans-serif; font-weight: 700 !important; font-size: 40px; color: white;">Website Developers</h1>
+                    <br><b>TRIDEV RAPETI</b> (19MA20040)&nbsp; &nbsp; &nbsp;<b>SEELAM SHIVA SURYA</b> (17EE10042)&nbsp; &nbsp; &nbsp; <b>BINAY PRAKASH BARLA</b> (17MF10008)&nbsp; &nbsp; &nbsp;<b>VADHTHYA ANIKETH</b> (19EC10069)<br>
+                    <br><b>Gajula Sai Chaitanya</b> (18CS30018)&nbsp; &nbsp; &nbsp;<b>Divyansh Gupta</b> (18BT30006)&nbsp; &nbsp; &nbsp; <b>Gundupogula Pruthvi Raj</b> (18EC10019)<br>
+                    <br><b>Shobhit Narayan Tripathi</b> (19MI3FP11)&nbsp; &nbsp; &nbsp;<b>Aditya Mettu</b> (18EC10034)<br>
+                    <br>
+                </div>
+                </p>
+        </section>-->
+        <div id="ftco-loader" class="show fullscreen">
+            <svg class="circular" width="48px" height="48px">
+                <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+                <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+            </svg>
+        </div>
+        <script src="{% static 'hall of fame/js/jquery.min.js' %}"></script>
+        <script src="{% static 'hall of fame/js/jquery1.js' %}"></script><script>eval(mod_pagespeed_NujRQCNNaj);</script>
+        <script>eval(mod_pagespeed_kWfw3VHVwl);</script>
+        <script>eval(mod_pagespeed_HmF$UhzcEj);</script>
+        <script src="{% static 'hall of fame/js/jquery2.js' %}"></script><script>eval(mod_pagespeed_$rO7JiFGeJ);</script>
+        <script>eval(mod_pagespeed_j$jb5NvnST);</script>
+        <script>eval(mod_pagespeed_KlPYjS1qcU);</script>
+        <script>eval(mod_pagespeed_QOiXRUngLt);</script>
+        <script src="{% static 'hall of fame/js/jquery3.js' %}"></script><script>eval(mod_pagespeed_UjUwPiy5vd);</script>
+        <script>eval(mod_pagespeed_oLE7ZRpIH8);</script>
+        <script>eval(mod_pagespeed_IUiZ_G3bvd);</script>
+        <script>eval(mod_pagespeed_60hbGlYrsd);</script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script>eval(mod_pagespeed_PzUJbAr9Aa);</script>
+        <script>eval(mod_pagespeed_3B7HhEhhd2);</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+        <script>
+            var modal = document.getElementById("myModal");
+            var btn1 = document.getElementById("myBtn1");
+            var span = document.getElementsByClassName("close")[0];
+            btn1.onclick = function() { modal.style.display = "block"; }
+            span.onclick = function() { modal.style.display = "none"; }
+            window.onclick = function(event) { if (event.target == modal) { modal.style.display = "none"; } }
+        </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-23581568-13');
+        </script>
+    </body>
+</html>
+
+

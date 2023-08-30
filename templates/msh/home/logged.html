@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <title>Meghnad Saha Hall of Residence</title>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel = 'stylesheet'>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                background-color: transparent;
+                font-family: 'Roboto', serif;
+                overflow: hidden;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 900;
+            }
+        </style>
+        <script>
+            window.console = window.console || function(t) {};
+        </script>    
+        <script>
+            if (document.location.search.match(/type=embed/gi)) {
+                window.parent.postMessage("resize", "*");
+            }
+        </script>
+    </head>
+    <body>
+        {% if messages|length %} 
+        <script>$("body").css("background-color","#e44c65");</script>
+        {% else %}
+        <h1 style="color: white; text-align:center; align-content: center;">Hello {{name}} !</h1>
+        {% endif %}
+        {% for message in messages %}
+        <h1 style="color: #e44c65; font-family: 'Exo', sans-serif; font-weight: 900; text-align:center; align-content: center;">{{message}}</h1>
+        {% endfor %}
+        <script id="rendered-js" >
+            const getFontSize = textLength => {
+                const baseSize = 10;
+                if (textLength >= baseSize) {
+                    textLength = baseSize - 4;
+                }
+                const fontSize = baseSize - textLength;
+                return `${fontSize}vw`;
+            };
+            const boxes = document.querySelectorAll('h1');
+            boxes.forEach(box => {
+                box.style.fontSize = getFontSize(box.textContent.length);
+            });
+            //# sourceURL=pen.js
+        </script>
+    </body>
+</html>

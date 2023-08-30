@@ -1,0 +1,13 @@
+.No{
+    text-align: center;
+}
+.footer{
+    text-align: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nav-bar{
+    font-size: xxx-large;
+}

@@ -1,0 +1,61 @@
+{% extends 'msh/notice/index2.html' %}
+
+{% block content %}
+    {% load static %}
+    <div class="mainDiv" style="padding-top: 100px; padding-bottom: 50px;">
+        <h1 style="font-family: 'Montserrat', sans-serif; font-size: 25px; color: #034f84; font-weight: bold; text-align: center;"><b>GENERAL NOTICES</b></h1>
+        <div class="centerColFullWidth pl0 pr0">
+            <p><br></p>
+            {% if notices|length > 0 %}
+                {% for notice in notices %}
+                    {% if forloop.counter0 %}
+                        <hr style="color: #0000;">
+                    {% endif %}
+                    <section id="global_trade_rules" class="projects-section ">
+                        <div class="container light-back" style="background-color: #f8f9fb;"> 
+                            <div class=damn>
+                                <div class="leftpart">
+                                    <div newclass>
+                                        <img class="img-responsive pt20 pr0" src="{{ 'media' }}/{{ notice.img }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="rightpart" style="padding-right: 0%;padding-top: 10px">
+                                    <div class="featured-text text-lg-left"  data-aos="fade-left">
+                                        <h2 class="blue" data-aos="zoom-in" id="about" style="color: #00AEFF;font-size: 20px;"><b>{{ notice.title }}</b></h2>
+                                        <p style="font-size: 18px">{{ notice.text }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                {% endfor %}
+            {% else %}
+                <section id="global_trade_rules" class="projects-section ">
+                    <div class="container light-back" style="background-color: #f8f9fb;"> 
+                        <div class=damn>
+                            <h1 style="font-family: 'Montserrat', sans-serif; font-size: 20px; letter-spacing: 7px; text-align: center;">NO NEW NOTICES</h1>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+            <script type="text/javascript" language="javascript1.2">AOS.init();</script> 
+            <script type="text/javascript" language="javascript1.2">
+                function myFunction() {
+                    document.getElementById("myDropdown").classList.toggle("show");
+                }
+                window.onclick = function(event) {
+                    if (!event.target.matches('.dropbtn')) {
+                        var dropdowns = document.getElementsByClassName("dropdown-content");
+                        var i;
+                        for (i = 0; i < dropdowns.length; i++) {
+                            var openDropdown = dropdowns[i];
+                            if (openDropdown.classList.contains('show')) {
+                                openDropdown.classList.remove('show');
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+{% endblock %}

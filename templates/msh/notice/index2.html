@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{% static 'notice/style.css' %}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <script language="Javascript1.2" src="imrdlib.js" type="text/javascript"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>NOTICE PAGE</title>
+        <script language="Javascript1.2" type="text/javascript" src="{% static 'notice/jquery.min.js' %}"></script>
+        <script language="Javascript1.2" src="{% static 'notice/jkmegamenu.js' %}" type="text/javascript"></script>
+        <script language="javascript1.2" type="text/javascript" src="{% static 'notice/common_data_e.js' %}"></script>
+        <meta http-equiv="Content-Language" content="en">
+        <link href="{% static 'notice/aos.css' %}" rel="stylesheet">
+        <script src="{% static 'notice/aos.js' %}"></script>
+        <link rel="icon" type="image/png" href="{% static 'gallery/img/logo.png' %}">
+        <link href="{% static 'notice/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <link href="{% static 'notice/lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'notice/lib/animate/animate.min.css' %}" rel="stylesheet">
+        <link href="{% static 'notice/lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+        <link href="{% static 'notice/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+        <link href="{% static 'notice/lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <script src="{% static 'notice/main.js' %}"></script>
+        <style>
+            body {
+                background-color: #f2f1ef !important;
+            }
+            ::-webkit-scrollbar {
+                opacity:0.2;
+                width: 5px;
+                height: 0px;
+                background-color: rgb(34, 84, 126);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #e97e90;
+                width:5px;
+                height:0px;
+            }
+            .masthead {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 35rem;
+                padding: 15rem 0;
+                background: linear-gradient(to bottom, rgba(22,22,22,.1) 0, rgba(22,22,22,.5) 75%, #161616 100%), url("{% static 'notice/coverbg.jpg' %}");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: inherit;
+                background-size: cover;
+            }
+            .bluebg {
+                background-color: #034f84;
+                padding-left: 25px;
+                padding-right: 25px;
+                padding-top: 0px;
+                padding-bottom: 10px;
+            }
+            .redborder {
+                text-align: center;
+                border-bottom: 1.5rem solid #92a8d1
+            }
+            @media (min-width:992px) {
+                .navbar{
+                    margin-bottom: 0px;
+                    border-radius: 0px
+                }
+                #mainNav.stick {
+                    position: fixed;
+                    top: 0
+                }
+            }
+            .projects-section .featured-text {
+                padding: 0 0 0 0.5rem;
+                border-left: .5rem solid #f7786b
+            }
+            .text-white{
+                color: white
+            }
+            .center-text{
+                text-align: center
+            }
+            .projects-section .featured-text {
+                padding-left: 10px;
+            }
+            #Sidenav a {
+                position: absolute;
+                left: -110px;
+                transition: 0.3s;
+                padding: 15px;
+                width: 140px;
+                text-decoration: none;
+                font-size: 20px;
+                color: white;
+                border-radius: 0 5px 5px 0;
+                z-index: 99;
+            }
+            #Sidenav a:hover {
+                left: 0;
+            }
+            #wbhm {
+                top: 80px;
+                background-color: #f7cac9;
+                color: #ff5441;
+            }
+            #gallery {
+                top: 140px;
+                background-color: #f7786b;
+            }
+            #hof {
+                top: 200px;
+                background-color: #92a8d1;
+            }
+            #go {
+                position: fixed !important;
+                top: 260px;
+                background-color: #034f84;
+            }
+        </style>
+    </head>
+    <body  link="#808080" vlink="#808080">
+        <div id="Sidenav" class="sidenav" style="position: fixed !important; z-index: 100000000;">
+            <a href="../" id="wbhm" style="color: #2b0400; font-family: 'Montserrat', sans-serif; font-weight: lighter; font-size: 15px;">Home</a>
+            <a href="../gallery" id="gallery" style="color: #ffffff; font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 15px;">Gallery</a>
+            <a href="../hall_of_fame" id="hof" style="color: rgb(20, 3, 2); font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 15px;">Hall of Fame</a>
+            <a href="../database" id="hof" style="color: rgb(20, 3, 2); font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 15px;">Database</a>
+            <a href="../hcm" id="hof" style="color: rgb(20, 3, 2); font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 15px;">HCM</a>
+            <a href="..#notice" id="go" style=" font-family: 'Montserrat', sans-serif; font-weight: 100; font-size: 15px;">Notice</a>
+        </div>
+        <div id="page" class fc >
+            <nav class="navbar-fixed-top">
+                <h1 class="text-white center-text" data-aos="fade-up"></h1>
+                <h1 class="paralargetext text-white bluebg redborder" data-aos="flip-left" style="margin-top: -30px; width: 100%; margin-left: 00%; font-family: 'Montserrat', sans-serif;font-size: 30px; font-weight: 50; letter-spacing: 15px;"><br>Meghnad Saha Hall Notices<br></h1>
+            </nav>
+            {% block content %}
+
+            {% endblock %}
+            <div id="footer">
+
+            </div>
+        </div>
+        <script language="javascript1.2" src="{% static 'notice/library/wtomenus/loader_wide_2011.js' %}" type="text/javascript"></script>
+        <div id="programs" class="tooltiptext" id="navtxt" style="left: 0px; visibility: hidden; position: absolute; top: -100px; z-index:5000;"></div>
+        <section class="paralax-mf footer-paralax bg-image sect-mt4 route" style="background-image: url('{% static "notice/overlay-bg.jpg" %}'); align-content: center; height: 395px;" id="contact">
+            <div class="overlay-mf"></div>
+            <div class="container" style="margin-top: -55px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="contact-mf">
+                            <div id="contact" class="box-shadow-full">
+                                <div class="row">
+                                    <center style="margin-left: 130px;">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-6">
+                                            <div class="title-box-2 pt-4 pt-md-0">
+                                                <h5 class="title-left" style="color: white;">Get in Touch</h5>
+                                            </div>
+                                            <div class="more-info">
+                                                <p class="lead">"Meghnad Saha Hall of Residence IIT Kharagpur, Kharagpur, West Bengal 721302, Security/Office Phones: +91 3222-2-811-80/82"</p>
+                                                <img src="{% static 'hall of fame/images/logo.png' %}" style="height: 100px;">
+                                            </div>
+                                            <div class="socials">
+                                                <ul>
+                                                    <li><a target="_blank" href="https://www.facebook.com/people/Meghnad-Saha-Hall-of-ResidenceIIT-Kharagpur/100048064886184/" style="color: white;"><span class="ico-circle"><i class="ion-social-facebook" style="font-size: 27px;"></i></span></a></li>
+                                                    <li><a target="_blank" href="mailto:mshall@iitkgp.ac.in"style="color: white;"><span class="ico-circle"><i class="ion-social-linkedin" style="font-size: 27px;"></i></span></a></li>
+                                                    <li><a target="_blank" href="https://in.linkedin.com/company/meghnad-saha-hall-of-residence-indian-institute-of-technology-kharagpur"style="color: white;"><span class="ico-circle"><i class="ion-social-twitter" style="font-size: 27px;"></i></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <div id="preloader"></div>
+        <script src="{% static 'notice/lib/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'notice/lib/jquery/jquery-migrate.min.js' %}"></script>
+        <script src="{% static 'notice/lib/popper/popper.min.js' %}"></script>
+        <script src="{% static 'notice/lib/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'notice/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'notice/lib/counterup/jquery.waypoints.min.js' %}"></script>
+        <script src="{% static 'notice/lib/counterup/jquery.counterup.js' %}"></script>
+        <script src="{% static 'notice/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'notice/lib/lightbox/js/lightbox.min.js' %}"></script>
+        <script src="{% static 'notice/lib/typed/typed.min.js' %}"></script>
+        <script src="{% static 'notice/js/main.js' %}"></script>
+    </body>
+</html>
